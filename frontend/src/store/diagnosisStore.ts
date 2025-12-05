@@ -1,8 +1,10 @@
 import { create } from 'zustand'
 
+export type MessageRole = 'user' | 'system'
+
 export interface ChatMessage {
   id: string
-  sender: 'user' | 'system'
+  sender: MessageRole
   content: string
   timestamp: number
 }

@@ -210,11 +210,11 @@
 
 ### Step 17: Build Main Application Layout
 
-- [ ] Create main application layout:
+- [x] Create main application layout:
   - Header with app title
   - Chat interface area
   - Result display area
-- [ ] Implement basic routing (Home → Diagnosis → Result)
+- [x] Implement basic routing (Home → Diagnosis → Result)
 
 ---
 
@@ -239,7 +239,7 @@
 | Phase 1: Project Setup |  🟢 Completed  |    100%    |
 | Phase 2: AI Engine     |  🟢 Completed  |    100%    |
 | Phase 3: Backend API   |  🟢 Completed  |    100%    |
-| Phase 4: Frontend      | 🟡 In Progress |    50%     |
+| Phase 4: Frontend      | 🟡 In Progress |    85%     |
 
 ---
 
