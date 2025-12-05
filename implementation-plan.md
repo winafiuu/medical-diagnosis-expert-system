@@ -88,20 +88,20 @@
 
 ### Step 5: Define Facts & Knowledge Representation
 
-- [ ] Create symptom facts (Fever, Cough, Fatigue, etc.)
-- [ ] Create disease facts (Influenza, COVID-19, Pneumonia, etc.)
-- [ ] Implement Certainty Factor (CF) support in facts
-- [ ] Create base classes for symptom and diagnosis facts
+- [x] Create symptom facts (Fever, Cough, Fatigue, etc.)
+- [x] Create disease facts (Influenza, COVID-19, Pneumonia, etc.)
+- [x] Implement Certainty Factor (CF) support in facts
+- [x] Create base classes for symptom and diagnosis facts
 
 ---
 
 ### Step 6: Implement Certainty Factor Logic
 
-- [ ] Implement CF calculation utilities:
+- [x] Implement CF calculation utilities:
   - AND logic: `min(CF1, CF2)`
   - OR logic: `max(CF1, CF2)`
   - Rule confidence: `Final_CF = Combined_Evidence_CF * Rule_Reliability_CF`
-- [ ] Create CF combination functions
+- [x] Create CF combination functions
 
 ---
 
@@ -237,7 +237,7 @@
 | Phase                  |     Status     | Completion |
 | :--------------------- | :------------: | :--------: |
 | Phase 1: Project Setup |  🟢 Completed  |    100%    |
-| Phase 2: AI Engine     | 🔴 Not Started |     0%     |
+| Phase 2: AI Engine     | � In Progress  |    33%     |
 | Phase 3: Backend API   | 🔴 Not Started |     0%     |
 | Phase 4: Frontend      | 🔴 Not Started |     0%     |
 
