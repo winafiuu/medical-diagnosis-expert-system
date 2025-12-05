@@ -46,13 +46,14 @@ def main():
                 if action == 'start':
                     # Start a new diagnosis session
                     engine.reset_session()
+                    
+                    # Get the initial question
+                    initial_question = engine.get_initial_question()
+                    
                     response = {
                         'status': 'success',
                         'message': 'Diagnosis session started',
-                        'next_question': {
-                            'symptom': 'fever',
-                            'text': 'Are you experiencing a fever?'
-                        }
+                        'next_question': initial_question
                     }
                 
                 elif action == 'add_symptom':
@@ -66,19 +67,48 @@ def main():
                             'message': 'Symptom name is required'
                         }
                     else:
-                        engine.add_symptom(symptom, certainty)
-                        engine.run()  # Run the inference engine
+                        # Record the answer
+                        engine.record_answer(symptom, certainty)
                         
-                        # For now, return a placeholder response
-                        # This will be enhanced in later steps with actual question logic
-                        response = {
-                            'status': 'success',
-                            'message': 'Symptom added',
-                            'next_question': {
-                                'symptom': 'cough',
-                                'text': 'Do you have a cough?'
+                        # Add symptom to knowledge base
+                        engine.add_symptom(symptom, certainty)
+                        
+                        # Run the inference engine
+                        engine.run()
+                        
+                        # Check if we should continue asking or provide diagnosis
+                        if engine.should_continue_asking():
+                            # Get next question
+                            next_question = engine.get_next_question()
+                            
+                            if next_question:
+                                response = {
+                                    'status': 'success',
+                                    'message': 'Symptom recorded',
+                                    'next_question': next_question
+                                }
+                            else:
+                                # No more questions, provide diagnosis
+                                results = engine.get_diagnosis_results()
+                                diagnosis_list = [
+                                    {'disease': disease, 'certainty': certainty}
+                                    for disease, certainty in results
+                                ]
+                                response = {
+                                    'status': 'success',
+                                    'diagnosis': diagnosis_list
+                                }
+                        else:
+                            # Ready to provide diagnosis
+                            results = engine.get_diagnosis_results()
+                            diagnosis_list = [
+                                {'disease': disease, 'certainty': certainty}
+                                for disease, certainty in results
+                            ]
+                            response = {
+                                'status': 'success',
+                                'diagnosis': diagnosis_list
                             }
-                        }
                 
                 elif action == 'get_diagnosis':
                     # Get the final diagnosis
@@ -125,3 +155,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

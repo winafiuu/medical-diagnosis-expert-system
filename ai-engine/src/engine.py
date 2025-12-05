@@ -12,6 +12,7 @@ from .rules import (
     InfluenzaRules, Covid19Rules, CommonColdRules,
     StrepThroatRules, PneumoniaRules, BronchitisRules
 )
+from .question_engine import QuestionEngine
 
 
 class MedicalDiagnosisEngine(
@@ -37,6 +38,7 @@ class MedicalDiagnosisEngine(
         self.diagnoses = {}  # Store diagnosis results with certainty factors
         self.questions_asked = []  # Track which questions have been asked
         self.next_question = None  # The next question to ask the user
+        self.question_engine = QuestionEngine()  # Question-asking engine
         
     def reset_session(self):
         """Reset the engine for a new diagnosis session."""
@@ -44,6 +46,7 @@ class MedicalDiagnosisEngine(
         self.diagnoses = {}
         self.questions_asked = []
         self.next_question = None
+        self.question_engine.reset()
     
     def add_symptom(self, symptom_name, certainty):
         """
@@ -120,5 +123,44 @@ class MedicalDiagnosisEngine(
             )
         else:
             self.diagnoses[disease] = certainty
+    
+    def get_next_question(self):
+        """
+        Get the next question to ask the user based on current diagnosis state.
+        
+        Returns:
+            dict: Question dictionary with 'symptom' and 'text' keys, or None
+        """
+        return self.question_engine.get_next_question(self.diagnoses)
+    
+    def get_initial_question(self):
+        """
+        Get the first question to start the diagnosis session.
+        
+        Returns:
+            dict: Question dictionary with 'symptom' and 'text' keys
+        """
+        return self.question_engine.get_initial_question()
+    
+    def record_answer(self, symptom, certainty):
+        """
+        Record a user's answer to a question.
+        
+        Args:
+            symptom (str): The symptom that was asked about
+            certainty (float): The certainty factor (0.0 to 1.0)
+        """
+        self.question_engine.mark_question_asked(symptom, certainty)
+        self.questions_asked.append(symptom)
+    
+    def should_continue_asking(self):
+        """
+        Determine if we should continue asking questions or provide diagnosis.
+        
+        Returns:
+            bool: True if should continue asking, False if ready to diagnose
+        """
+        return self.question_engine.should_continue_asking(self.diagnoses)
+
 
 

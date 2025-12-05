@@ -129,10 +129,10 @@
 
 ### Step 9: Implement Question-Asking Logic (Backward Chaining Simulation)
 
-- [ ] Implement goal-driven question generation
-- [ ] Create salience-based rule priorities
-- [ ] Implement dynamic question selection based on previous answers
-- [ ] Create mapping between internal symptom names and user-friendly questions
+- [x] Implement goal-driven question generation
+- [x] Create salience-based rule priorities
+- [x] Implement dynamic question selection based on previous answers
+- [x] Create mapping between internal symptom names and user-friendly questions
 
 ---
 
@@ -237,7 +237,7 @@
 | Phase                  |     Status     | Completion |
 | :--------------------- | :------------: | :--------: |
 | Phase 1: Project Setup |  🟢 Completed  |    100%    |
-| Phase 2: AI Engine     | 🟡 In Progress |    50%     |
+| Phase 2: AI Engine     | 🟡 In Progress |   62.5%    |
 | Phase 3: Backend API   | 🔴 Not Started |     0%     |
 | Phase 4: Frontend      | 🔴 Not Started |     0%     |
 
