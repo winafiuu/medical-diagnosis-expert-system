@@ -168,11 +168,11 @@
 
 ### Step 13: Setup State Management (Zustand)
 
-- [ ] Create diagnosis store:
+- [x] Create diagnosis store:
   - Chat message history
   - Current question
   - Diagnosis result
-- [ ] Create loading/error states
+- [x] Create loading/error states
 
 ---
 
@@ -234,12 +234,12 @@
 
 ## Progress Tracker
 
-| Phase                  |     Status     | Completion |
-| :--------------------- | :------------: | :--------: |
-| Phase 1: Project Setup |  🟢 Completed  |    100%    |
-| Phase 2: AI Engine     |  🟢 Completed  |    100%    |
-| Phase 3: Backend API   |  � Completed   |    100%    |
-| Phase 4: Frontend      | 🔴 Not Started |     0%     |
+| Phase                  |    Status     | Completion |
+| :--------------------- | :-----------: | :--------: |
+| Phase 1: Project Setup | 🟢 Completed  |    100%    |
+| Phase 2: AI Engine     | 🟢 Completed  |    100%    |
+| Phase 3: Backend API   |  � Completed  |    100%    |
+| Phase 4: Frontend      | � In Progress |    16%     |
 
 ---
 
