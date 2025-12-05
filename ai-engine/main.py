@@ -61,10 +61,25 @@ def main():
                     symptom = data.get('symptom')
                     certainty = data.get('certainty', 1.0)
                     
+                    # Validate symptom parameter
                     if not symptom:
                         response = {
                             'status': 'error',
-                            'message': 'Symptom name is required'
+                            'message': 'Symptom name is required',
+                            'error_code': 'MISSING_SYMPTOM'
+                        }
+                    # Validate certainty parameter
+                    elif not isinstance(certainty, (int, float)):
+                        response = {
+                            'status': 'error',
+                            'message': f'Certainty must be a number, got {type(certainty).__name__}',
+                            'error_code': 'INVALID_CERTAINTY_TYPE'
+                        }
+                    elif certainty < 0.0 or certainty > 1.0:
+                        response = {
+                            'status': 'error',
+                            'message': f'Certainty must be between 0.0 and 1.0, got {certainty}',
+                            'error_code': 'CERTAINTY_OUT_OF_RANGE'
                         }
                     else:
                         # Record the answer
@@ -128,7 +143,8 @@ def main():
                 else:
                     response = {
                         'status': 'error',
-                        'message': f'Unknown action: {action}'
+                        'message': f'Unknown action: {action}. Valid actions are: start, add_symptom, get_diagnosis',
+                        'error_code': 'INVALID_ACTION'
                     }
                 
                 # Write response to stdout
@@ -137,14 +153,16 @@ def main():
             except json.JSONDecodeError as e:
                 error_response = {
                     'status': 'error',
-                    'message': f'Invalid JSON input: {str(e)}'
+                    'message': f'Invalid JSON input: {str(e)}',
+                    'error_code': 'INVALID_JSON'
                 }
                 print(json.dumps(error_response), flush=True)
             
             except Exception as e:
                 error_response = {
                     'status': 'error',
-                    'message': f'Internal error: {str(e)}'
+                    'message': f'Internal error: {str(e)}',
+                    'error_code': 'INTERNAL_ERROR'
                 }
                 print(json.dumps(error_response), flush=True)
     
