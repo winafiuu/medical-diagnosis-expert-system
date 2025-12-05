@@ -35,7 +35,7 @@ export const QuickResponseButtons: React.FC<QuickResponseButtonsProps> = ({
       <Button
         variant="outline"
         size="lg"
-        onClick={() => onSelect('no', 100)} // Traditionally 'no' might be handled as absence or negative CF, but here we likely map later.
+        onClick={() => onSelect('no', 0)}
         // Assuming 'no' means 0% certainty of the symptom or just negative response.
         // If the backend expects low CF for 'no', we might send 0 or -100 depending on logic.
         // For now, let's just pass 'no'. Sender can handle logic.

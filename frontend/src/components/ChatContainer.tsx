@@ -29,7 +29,7 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
   return (
     <div
       className={cn(
-        'flex flex-col h-[600px] w-full max-w-2xl mx-auto bg-background border rounded-xl shadow-lg overflow-hidden',
+        'flex flex-col h-full w-full bg-background/50 border rounded-xl shadow-sm overflow-hidden',
         className
       )}
     >
@@ -37,7 +37,7 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
         <ScrollArea className="h-full w-full p-4">
           <div className="flex flex-col space-y-4 pb-4">
             {messages.length === 0 && (
-              <div className="flex flex-col items-center justify-center h-40 text-muted-foreground animate-in fade-in zoom-in duration-500">
+              <div className="flex flex-col items-center justify-center h-full min-h-[200px] text-muted-foreground animate-in fade-in zoom-in duration-500">
                 <p className="text-lg font-medium">
                   Medical Diagnosis Assistant
                 </p>
@@ -63,10 +63,12 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
         </ScrollArea>
       </div>
 
-      {/* Input Area Footer */}
-      <div className="p-4 bg-muted/30 border-t backdrop-blur-sm">
-        {children}
-      </div>
+      {/* Input Area Footer - Only render if children exist */}
+      {children && (
+        <div className="p-4 bg-muted/30 border-t backdrop-blur-sm">
+          {children}
+        </div>
+      )}
     </div>
   )
 }

@@ -13,7 +13,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   return (
     <div
       className={cn(
-        'flex w-full mb-4 opacity-0 animate-[fadeIn_0.5s_ease-out_forwards]',
+        'flex w-full mb-4 animate-in fade-in slide-in-from-bottom-2 duration-300',
         isUser ? 'justify-end' : 'justify-start'
       )}
     >

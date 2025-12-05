@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatContainer } from '@/components/ChatContainer'
-import { ChatInput } from '@/components/ChatInput'
 import { QuickResponseButtons } from '@/components/QuickResponseButtons'
 import { SymptomSlider } from '@/components/SymptomSlider'
 import { Button } from '@/components/ui/button'
@@ -10,21 +9,28 @@ import { useStartDiagnosis, useSubmitAnswer } from '@/hooks/useDiagnosis'
 
 export default function Diagnosis() {
   const navigate = useNavigate()
-  const { messages, isLoading, currentQuestion, diagnosisResult, error } =
-    useDiagnosisStore()
-  const { mutate: startDiagnosis, isPending: isStarting } = useStartDiagnosis()
-  const { mutate: submitAnswer, isPending: isSubmitting } = useSubmitAnswer()
+  const {
+    messages,
+    currentQuestion,
+    diagnosisResult,
+    error,
+    addMessage,
+    sessionId,
+    isLoading,
+  } = useDiagnosisStore()
+  const { mutate: startDiagnosis } = useStartDiagnosis()
+  const { mutate: submitAnswer } = useSubmitAnswer()
+
+  const hasStartedRef = useRef(false)
 
   const [sliderValue, setSliderValue] = useState(50)
 
   // Start diagnosis on mount
   useEffect(() => {
-    // Only start if we don't have messages or specific state
-    // Actually, always start fresh for "Diagnosis" page is usually expected,
-    // or we could check if session exists.
-    // For now, let's start fresh.
+    if (hasStartedRef.current || sessionId) return
+    hasStartedRef.current = true
     startDiagnosis()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [sessionId, startDiagnosis])
 
   // Redirect to result if diagnosis is complete
   useEffect(() => {
@@ -33,41 +39,55 @@ export default function Diagnosis() {
     }
   }, [diagnosisResult, navigate])
 
+  const addUserMessage = (text: string) => {
+    addMessage({
+      id: crypto.randomUUID(),
+      sender: 'user',
+      content: text,
+      timestamp: Date.now(),
+    })
+  }
+
   const handleQuickResponse = (type: string, cf?: number) => {
     let certainty = 0.5
-    // cf from QuickResponseButtons is 0-100
+    let text = 'Unsure'
+
+    // cf from QuickResponseButtons is 0-100 scales
     if (cf !== undefined) {
       certainty = cf / 100
+
+      // Format display text nicely
+      if (type === 'yes') text = 'Yes'
+      else if (type === 'no') text = 'No'
+      else if (type === 'unsure') text = 'Unsure'
+      else text = `${type} (${cf}%)`
     } else {
-      // Fallback defaults
-      if (type === 'yes') certainty = 1.0
-      if (type === 'no') certainty = 0.0
-      if (type === 'unsure') certainty = 0.5
+      // Fallback if no CF provided (shouldn't happen with updated buttons but safe to keep)
+      if (type === 'yes') {
+        certainty = 1.0
+        text = 'Yes'
+      }
+      if (type === 'no') {
+        certainty = 0.0
+        text = 'No'
+      }
+      if (type === 'unsure') {
+        certainty = 0.5
+        text = 'Unsure'
+      }
     }
 
+    addUserMessage(text)
     submitAnswer({ certainty })
   }
 
   const handleSliderSubmit = () => {
+    addUserMessage(`Certainty: ${sliderValue}%`)
     submitAnswer({ certainty: sliderValue / 100 })
   }
 
-  const handleTextSubmit = (text: string) => {
-    const lower = text.toLowerCase()
-    if (lower.match(/\b(yes|yeah|sure|yep|definitely)\b/)) {
-      submitAnswer({ certainty: 1.0 })
-    } else if (lower.match(/\b(no|nope|nah|none|not)\b/)) {
-      submitAnswer({ certainty: 0.0 })
-    } else if (lower.match(/\b(maybe|unsure|dont know|dunno)\b/)) {
-      submitAnswer({ certainty: 0.5 })
-    } else {
-      // Simple heuristic failed
-      // using alert or console for now if no toast
-      console.log('Could not parse response:', text)
-    }
-  }
-
-  const isBusy = isLoading || isStarting || isSubmitting
+  // Use the global store loading state which is explicitly managed by our hooks
+  const isBusy = isLoading
 
   return (
     <div className="flex flex-col h-[calc(100vh-140px)] w-full max-w-4xl mx-auto">
@@ -106,17 +126,6 @@ export default function Diagnosis() {
               disabled={isBusy}
             />
 
-            <div className="relative py-2">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  Or be precise
-                </span>
-              </div>
-            </div>
-
             <div className="flex items-end gap-4">
               <div className="flex-1">
                 <SymptomSlider value={sliderValue} onChange={setSliderValue} />
@@ -128,14 +137,6 @@ export default function Diagnosis() {
               >
                 Submit
               </Button>
-            </div>
-
-            <div className="pt-2">
-              <ChatInput
-                onSend={handleTextSubmit}
-                disabled={isBusy}
-                placeholder="Type 'yes', 'no', or 'unsure'..."
-              />
             </div>
           </div>
         ) : (

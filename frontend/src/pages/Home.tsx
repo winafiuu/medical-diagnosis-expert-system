@@ -12,7 +12,7 @@ export default function Home() {
 
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-foreground">
           Smart Health Insights <br className="hidden sm:inline" />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600">
+          <span className="bg-clip-text text-transparent bg-linear-to-r from-primary to-blue-600">
             Powered by Expert Systems
           </span>
         </h1>
