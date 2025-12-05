@@ -178,11 +178,11 @@
 
 ### Step 14: Setup API Layer (React Query + Axios)
 
-- [ ] Create Axios instance with base configuration
-- [ ] Implement API hooks:
+- [x] Create Axios instance with base configuration
+- [x] Implement API hooks:
   - `useStartDiagnosis` - Start new session
   - `useSubmitAnswer` - Submit symptom response
-- [ ] Add error handling
+- [x] Add error handling
 
 ---
 
@@ -234,12 +234,12 @@
 
 ## Progress Tracker
 
-| Phase                  |    Status     | Completion |
-| :--------------------- | :-----------: | :--------: |
-| Phase 1: Project Setup | 🟢 Completed  |    100%    |
-| Phase 2: AI Engine     | 🟢 Completed  |    100%    |
-| Phase 3: Backend API   |  � Completed  |    100%    |
-| Phase 4: Frontend      | � In Progress |    16%     |
+| Phase                  |     Status     | Completion |
+| :--------------------- | :------------: | :--------: |
+| Phase 1: Project Setup |  🟢 Completed  |    100%    |
+| Phase 2: AI Engine     |  🟢 Completed  |    100%    |
+| Phase 3: Backend API   |  🟢 Completed  |    100%    |
+| Phase 4: Frontend      | 🟡 In Progress |    33%     |
 
 ---
 
