@@ -4,29 +4,29 @@ import { Activity } from 'lucide-react'
 
 const Layout: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
+    <div className="min-h-screen bg-background flex flex-col font-sans text-foreground selection:bg-primary/20">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/75 backdrop-blur supports-backdrop-filter:bg-white/60">
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link
             to="/"
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            <div className="bg-blue-600 p-1.5 rounded-lg text-white">
+            <div className="bg-primary/10 p-2 rounded-xl text-primary ring-1 ring-primary/20">
               <Activity className="h-6 w-6" />
             </div>
-            <span className="font-bold text-xl tracking-tight text-slate-900">
-              Medi<span className="text-blue-600">Diagnose</span>
+            <span className="font-bold text-xl tracking-tight text-foreground">
+              Medi<span className="text-primary">Diagnose</span>
             </span>
           </Link>
 
-          <nav className="flex items-center gap-6 text-sm font-medium text-slate-600">
-            <Link to="/" className="hover:text-blue-600 transition-colors">
+          <nav className="flex items-center gap-6 text-sm font-medium text-muted-foreground">
+            <Link to="/" className="hover:text-primary transition-colors">
               Home
             </Link>
             <Link
               to="/diagnosis"
-              className="hover:text-blue-600 transition-colors"
+              className="hover:text-primary transition-colors"
             >
               New Diagnosis
             </Link>
@@ -40,8 +40,8 @@ const Layout: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 py-6 bg-white">
-        <div className="container mx-auto px-4 text-center text-sm text-slate-500">
+      <footer className="border-t border-border/40 py-6 bg-background/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
           <p>
             &copy; {new Date().getFullYear()} MediDiagnose Expert System. For
             educational purposes only.

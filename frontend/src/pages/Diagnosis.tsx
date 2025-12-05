@@ -72,7 +72,7 @@ export default function Diagnosis() {
   return (
     <div className="flex flex-col h-[calc(100vh-140px)] w-full max-w-4xl mx-auto">
       <div className="text-center space-y-2 mb-4 shrink-0">
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground">
           Diagnosis Session
         </h2>
         <p className="text-muted-foreground text-sm">
@@ -80,7 +80,7 @@ export default function Diagnosis() {
         </p>
       </div>
 
-      <div className="flex-1 min-h-0 mb-4 overflow-hidden border rounded-xl bg-slate-50/50 dark:bg-slate-900/50">
+      <div className="flex-1 min-h-0 mb-4 overflow-hidden border border-border/50 rounded-2xl bg-muted/30 backdrop-blur-sm shadow-inner">
         <ChatContainer
           messages={messages}
           isLoading={isBusy && !currentQuestion}
@@ -88,16 +88,16 @@ export default function Diagnosis() {
       </div>
 
       {error && (
-        <div className="p-3 mb-4 text-sm text-red-500 bg-red-50 rounded-lg dark:bg-red-900/20 dark:text-red-400">
+        <div className="p-3 mb-4 text-sm text-destructive bg-destructive/10 rounded-lg border border-destructive/20">
           Error: {error}
         </div>
       )}
 
       {/* Input Area */}
-      <div className="shrink-0 space-y-4 p-4 bg-background rounded-xl border border-border shadow-sm">
+      <div className="shrink-0 space-y-4 p-4 bg-card/50 backdrop-blur-md rounded-2xl border border-border shadow-sm">
         {currentQuestion ? (
           <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <p className="text-sm font-medium text-center text-muted-foreground">
+            <p className="text-sm font-medium text-center text-foreground/80">
               {currentQuestion}
             </p>
 

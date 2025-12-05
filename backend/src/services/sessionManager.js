@@ -25,11 +25,15 @@ class DiagnosisSession {
    */
   start() {
     return new Promise((resolve, reject) => {
-      const pythonPath =
+      const scriptPath =
         process.env.PYTHON_ENGINE_PATH ||
         path.join(__dirname, '../../../ai-engine/main.py')
 
-      this.pythonProcess = spawn('python3', [pythonPath])
+      const pythonExecutable =
+        process.env.PYTHON_EXECUTABLE ||
+        path.join(__dirname, '../../../ai-engine/venv/bin/python')
+
+      this.pythonProcess = spawn(pythonExecutable, [scriptPath])
       this.isActive = true
 
       let startupComplete = false
