@@ -8,10 +8,17 @@ from . import compat
 
 from experta import KnowledgeEngine, Rule, AND, OR, NOT
 from .facts import Symptom, Diagnosis, Question, PatientInfo
-from .rules import InfluenzaRules, Covid19Rules, CommonColdRules
+from .rules import (
+    InfluenzaRules, Covid19Rules, CommonColdRules,
+    StrepThroatRules, PneumoniaRules, BronchitisRules
+)
 
 
-class MedicalDiagnosisEngine(InfluenzaRules, Covid19Rules, CommonColdRules, KnowledgeEngine):
+class MedicalDiagnosisEngine(
+    InfluenzaRules, Covid19Rules, CommonColdRules,
+    StrepThroatRules, PneumoniaRules, BronchitisRules,
+    KnowledgeEngine
+):
     """
     The main expert system engine for medical diagnosis.
     Uses forward chaining with certainty factors to diagnose respiratory illnesses.
@@ -20,6 +27,9 @@ class MedicalDiagnosisEngine(InfluenzaRules, Covid19Rules, CommonColdRules, Know
     - InfluenzaRules: Rules for diagnosing influenza
     - Covid19Rules: Rules for diagnosing COVID-19
     - CommonColdRules: Rules for diagnosing common cold
+    - StrepThroatRules: Rules for diagnosing strep throat
+    - PneumoniaRules: Rules for diagnosing pneumonia
+    - BronchitisRules: Rules for diagnosing bronchitis
     """
     
     def __init__(self):

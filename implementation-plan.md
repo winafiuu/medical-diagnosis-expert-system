@@ -118,12 +118,12 @@
 
 ### Step 8: Implement Bacterial Disease Rules (Knowledge Lead B)
 
-- [ ] Research medical data for bacterial illnesses
-- [ ] Implement rules for:
+- [x] Research medical data for bacterial illnesses
+- [x] Implement rules for:
   - **Strep Throat** - Symptoms: severe sore throat, fever, swollen lymph nodes
   - **Pneumonia** - Symptoms: high fever, chest pain, productive cough, shortness of breath
   - **Bronchitis** - Symptoms: persistent cough, chest discomfort, mucus production
-- [ ] Add CF weights to each rule based on medical reliability
+- [x] Add CF weights to each rule based on medical reliability
 
 ---
 
