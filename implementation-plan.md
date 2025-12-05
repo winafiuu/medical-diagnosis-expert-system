@@ -107,12 +107,12 @@
 
 ### Step 7: Implement Viral Disease Rules (Knowledge Lead A)
 
-- [ ] Research medical data for viral illnesses
-- [ ] Implement rules for:
+- [x] Research medical data for viral illnesses
+- [x] Implement rules for:
   - **Influenza (Flu)** - Symptoms: fever, body aches, fatigue, cough
   - **COVID-19** - Symptoms: fever, dry cough, loss of taste/smell, fatigue
   - **Common Cold** - Symptoms: runny nose, sneezing, mild cough, sore throat
-- [ ] Add CF weights to each rule based on medical reliability
+- [x] Add CF weights to each rule based on medical reliability
 
 ---
 
@@ -237,7 +237,7 @@
 | Phase                  |     Status     | Completion |
 | :--------------------- | :------------: | :--------: |
 | Phase 1: Project Setup |  🟢 Completed  |    100%    |
-| Phase 2: AI Engine     | � In Progress  |    33%     |
+| Phase 2: AI Engine     | 🟡 In Progress |    50%     |
 | Phase 3: Backend API   | 🔴 Not Started |     0%     |
 | Phase 4: Frontend      | 🔴 Not Started |     0%     |
 

@@ -3,14 +3,23 @@ Main inference engine for the medical diagnosis expert system.
 This module contains the core logic for the expert system using Experta.
 """
 
+# Import compatibility patch for Python 3.12+
+from . import compat
+
 from experta import KnowledgeEngine, Rule, AND, OR, NOT
 from .facts import Symptom, Diagnosis, Question, PatientInfo
+from .rules import InfluenzaRules, Covid19Rules, CommonColdRules
 
 
-class MedicalDiagnosisEngine(KnowledgeEngine):
+class MedicalDiagnosisEngine(InfluenzaRules, Covid19Rules, CommonColdRules, KnowledgeEngine):
     """
     The main expert system engine for medical diagnosis.
     Uses forward chaining with certainty factors to diagnose respiratory illnesses.
+    
+    Inherits diagnostic rules from:
+    - InfluenzaRules: Rules for diagnosing influenza
+    - Covid19Rules: Rules for diagnosing COVID-19
+    - CommonColdRules: Rules for diagnosing common cold
     """
     
     def __init__(self):
@@ -101,6 +110,5 @@ class MedicalDiagnosisEngine(KnowledgeEngine):
             )
         else:
             self.diagnoses[disease] = certainty
-    
-    # Placeholder for rules - will be implemented in later steps
-    # Rules will be added here for different diseases
+
+
