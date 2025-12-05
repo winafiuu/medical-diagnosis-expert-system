@@ -13,6 +13,7 @@ export const useStartDiagnosis = () => {
     setError,
     resetDiagnosis,
     setCurrentQuestion,
+    setCurrentSymptomId,
     addMessage,
   } = useDiagnosisStore()
 
@@ -32,6 +33,7 @@ export const useStartDiagnosis = () => {
         const nextQuestion = response.data.next_question
         if (nextQuestion) {
           setCurrentQuestion(nextQuestion.text)
+          setCurrentSymptomId(nextQuestion.symptom)
           // Add system message
           addMessage({
             id: crypto.randomUUID(),
@@ -54,23 +56,30 @@ export const useStartDiagnosis = () => {
 export const useSubmitAnswer = () => {
   const {
     sessionId,
+    currentSymptomId,
     setLoading,
     setError,
     setCurrentQuestion,
+    setCurrentSymptomId,
     setDiagnosisResult,
     addMessage,
   } = useDiagnosisStore()
 
   return useMutation({
     mutationFn: ({
-      symptom,
       certainty,
+      symptomOverride, // Optional: allow component to pass symptom explicitly if needed, otherwise use store
     }: {
-      symptom: string
       certainty: number
+      symptomOverride?: string
     }) => {
       if (!sessionId) throw new Error('No active session')
-      return submitAnswer(sessionId, symptom, certainty)
+      // Use the override if provided, otherwise the stored symptom ID
+      const symptomToSubmit = symptomOverride || currentSymptomId
+
+      if (!symptomToSubmit) throw new Error('No current symptom to answer for')
+
+      return submitAnswer(sessionId, symptomToSubmit, certainty)
     },
     onMutate: () => {
       setLoading(true)
@@ -83,6 +92,7 @@ export const useSubmitAnswer = () => {
 
         if (next_question) {
           setCurrentQuestion(next_question.text)
+          setCurrentSymptomId(next_question.symptom)
           addMessage({
             id: crypto.randomUUID(),
             sender: 'system',
@@ -91,7 +101,19 @@ export const useSubmitAnswer = () => {
           })
         } else if (diagnosis) {
           setCurrentQuestion(null)
-          setDiagnosisResult(diagnosis)
+          setCurrentSymptomId(null)
+
+          // Map backend response (disease, certainty) to store (disease, confidence)
+          const mappedDiagnosis = Array.isArray(diagnosis)
+            ? diagnosis.map((d: any) => ({
+                disease: d.disease,
+                confidence: d.certainty,
+                explanation: d.explanation, // assuming backend might send this later
+                description: d.description,
+              }))
+            : []
+
+          setDiagnosisResult(mappedDiagnosis)
           addMessage({
             id: crypto.randomUUID(),
             sender: 'system',
