@@ -29,9 +29,7 @@ class DiagnosisSession {
         process.env.PYTHON_ENGINE_PATH ||
         path.join(__dirname, '../../../ai-engine/main.py')
 
-      const pythonExecutable =
-        process.env.PYTHON_EXECUTABLE ||
-        path.join(__dirname, '../../../ai-engine/venv/bin/python')
+      const pythonExecutable = process.env.PYTHON_EXECUTABLE || 'python'
 
       this.pythonProcess = spawn(pythonExecutable, [scriptPath])
       this.isActive = true
