@@ -16,8 +16,8 @@ export const runDiagnosisEngine = (input) => {
       process.env.PYTHON_ENGINE_PATH ||
       path.join(__dirname, '../../../ai-engine/main.py')
 
-    // Spawn Python process
-    const pythonProcess = spawn('python3', [pythonPath])
+    // Spawn Python process (use 'python' which points to venv in Docker)
+    const pythonProcess = spawn('python', [pythonPath])
 
     let outputData = ''
     let errorData = ''
