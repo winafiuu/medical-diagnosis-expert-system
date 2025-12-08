@@ -18,10 +18,13 @@ COPY ai-engine/requirements.txt ./ai-engine/
 # Install Node.js dependencies
 RUN cd backend && npm install --production
 
-# Install Python dependencies
-# Note: Using --break-system-packages is necessary in newer Debian environments 
-# inside Docker when not using a venv. Since this is a container, it's safe.
-RUN pip3 install -r ai-engine/requirements.txt --break-system-packages
+# Create and activate Python virtual environment
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install Python dependencies in the virtual environment
+RUN pip install --upgrade pip && \
+    pip install -r ai-engine/requirements.txt
 
 # Copy the rest of the application code
 COPY backend ./backend
@@ -30,7 +33,7 @@ COPY ai-engine ./ai-engine
 # Set environment variables
 ENV NODE_ENV=production
 ENV PORT=3000
-# Ensure the backend knows where to find python if needed, though 'python3' is in PATH
+# Python is available via the venv (activated by PATH modification above)
 ENV PYTHON_ENGINE_PATH=/app/ai-engine/main.py
 
 # Expose the API port
