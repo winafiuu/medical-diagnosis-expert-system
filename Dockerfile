@@ -16,7 +16,7 @@ COPY backend/package*.json ./backend/
 COPY ai-engine/requirements.txt ./ai-engine/
 
 # Install Node.js dependencies
-RUN cd backend && npm ci --only=production
+RUN cd backend && npm install --production
 
 # Install Python dependencies
 # Note: Using --break-system-packages is necessary in newer Debian environments 
