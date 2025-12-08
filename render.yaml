@@ -21,7 +21,4 @@ services:
     staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: medical-diagnosis-api
-          property: url
+        sync: false
