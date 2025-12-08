@@ -1,2 +1,2 @@
 experta==1.9.4
-frozendict>=2.3.0
+frozendict<1.2
