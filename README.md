@@ -162,6 +162,7 @@ For detailed instructions, see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 | 🌐 **Live Website**        | [medical-diagnosis-web.onrender.com](https://medical-diagnosis-web.onrender.com/)     |
 | 📊 **Presentation Slides** | [View on Canva](https://www.canva.com/design/DAG7aJsxHE0/Z09988A-A2yx6l5dKawi4g/edit) |
 | 🎥 **Video Demo**          | [Watch on Loom](https://www.loom.com/share/a40c4501ecbe4f4eb6a55d322789b772)          |
+| 📄 **Project Report**      | [View PDF](docs/project-report.pdf)                                                   |
 
 ## ⚠️ Disclaimer
 
