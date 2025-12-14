@@ -44,6 +44,10 @@ medical-diagnosis-expert-system/
 │   ├── API_TESTING.md             # API testing documentation
 │   ├── STDIN_STDOUT_API.md        # Python engine API specification
 │   └── BACTERIAL_RULES_README.md  # Bacterial rules documentation
+├── resources/             # Project Resources
+│   ├── presentation.pptx  # Presentation slides
+│   ├── demo.mp4           # Video demonstration
+│   └── report.pdf         # Project report
 ├── Dockerfile             # Container configuration
 └── render.yaml            # Render Blueprint deployment config
 ```
@@ -157,12 +161,12 @@ For detailed instructions, see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ## 🔗 Other Resources
 
-| Resource                   | Link                                                                                  |
-| -------------------------- | ------------------------------------------------------------------------------------- |
-| 🌐 **Live Website**        | [medical-diagnosis-web.onrender.com](https://medical-diagnosis-web.onrender.com/)     |
-| 📊 **Presentation Slides** | [View on Canva](https://www.canva.com/design/DAG7aJsxHE0/Z09988A-A2yx6l5dKawi4g/edit) |
-| 🎥 **Video Demo**          | [Watch on Loom](https://www.loom.com/share/a40c4501ecbe4f4eb6a55d322789b772)          |
-| 📄 **Project Report**      | [View PDF](docs/project-report.pdf)                                                   |
+| Resource                   | Online Link                                                                           | Local File                                       |
+| -------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| 🌐 **Live Website**        | [medical-diagnosis-web.onrender.com](https://medical-diagnosis-web.onrender.com/)     | -                                                |
+| 📊 **Presentation Slides** | [View on Canva](https://www.canva.com/design/DAG7aJsxHE0/Z09988A-A2yx6l5dKawi4g/edit) | [presentation.pptx](resources/presentation.pptx) |
+| 🎥 **Video Demo**          | [Watch on Loom](https://www.loom.com/share/a40c4501ecbe4f4eb6a55d322789b772)          | [demo.mp4](resources/demo.mp4)                   |
+| 📄 **Project Report**      | -                                                                                     | [report.pdf](resources/report.pdf)               |
 
 ## ⚠️ Disclaimer
 
